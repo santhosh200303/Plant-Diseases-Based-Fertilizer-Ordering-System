@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon.png') }}">
+    <title>AgriCare Pro</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style1.css">
+    <style>
+         /* Custom CSS for navbar background color */
+        .custom-navbar 
+        {
+            background-color: #093b31; /* Replace with your desired color */
+        }
+        .custom-navbar, .custom-navbar .nav-link 
+        {
+            color: white; /* Sets text color to white */
+            font-size: 15px;
+        }
+
+        .custom-navbar .nav-link:hover 
+        {
+            color: #d1d1d1; /* Optional: Change color on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header (You can include your header here if you want) -->
+    {% include 'adminheader.html' %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table text-center table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Purchase Date</th>
+                            <th scope="col">Purchase ID.</th>
+                            <th scope="col">Supplier Name</th>
+                            <th scope="col">Supplier Phone_no.</th>
+                            <th scope="col">Supplier Address</th>
+                            <th scope="col">Grand Total</th>
+                            <th scope="col">Payment Mode</th>
+                            <th scope="col">Orders</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order1 in orders1 %}
+                            <tr>
+                                <td>{{ order1['purchase_date'] }}</td>
+                                <td>{{ order1['purchase_id'] }}</td>
+                                <td>{{ order1['Supplier_Name'] }}</td>
+                                <td>{{ order1['Supplier_Mobile'] }}</td>
+                                <td>{{ order1['Supplier_Address'] }}</td>
+                                <td>{{order1['Grand_Total']}}</td>
+                                <td>{{ order1['Pay_Mode'] }}</td>
+                                <td>
+                                    <table class="table text-center table-bordered">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th scope="col">Product Name</th>
+                                                <th scope="col">Product Price</th>
+                                                <th scope="col">Product Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for items in order1['orders_details'] %}
+                                                <tr>
+                                                    <td>{{ items['Product_Name'] }}</td>
+                                                    <td>{{ items['Product_Price'] }}</td>
+                                                    <td>{{ items['Product_Qty'] }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

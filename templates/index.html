@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon.png') }}">
+    <title>AgriCare Pro</title>
+   
+
+    <style>
+        /* =====================
+   GLOBAL STYLES
+===================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} 
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #a40000;
+    background-color: #90dd7d;
+    user-select: none;
+}
+
+/* =====================
+   HEADER & NAVBAR
+===================== */
+#home {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url("{{ url_for('static', filename='images/bg.avif') }}");   /* change image name */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+}
+header {
+    background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+                url("farm-bg.jpg") center/cover no-repeat;
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 60px;
+    background: rgba(0, 0, 0, 0.65);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 35px;
+    margin-right: 8px;
+}
+
+.logo span {
+    color: #FFBA00;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links li a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #FFBA00;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+    height: 25px;
+}
+
+.dropbtn {
+    background: #d1a700;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.dropbtn:hover{
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-content {
+    margin-top: -4px;
+    height: auto;
+    display: none;
+    position: absolute;
+    background-color: #d1a700;
+    min-width: 160px;
+    top: 33px;
+    right: 0;
+    border-radius: 13px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.dropdown-content a {
+    color: #000000;
+    padding: 8px 14px;
+    display: block;
+    text-decoration: none;
+    border-radius: 50px;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Mobile menu */
+.menu-toggle {
+    display: block;
+    font-size: 22px;
+    cursor: pointer;
+}
+.menu-toggle a{
+    color: #333;
+    padding: 10px 14px;
+    display: block;
+    text-decoration: none;
+    border-radius: 6px;
+}
+.menu-dropdown {
+     display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    top: 33px;
+    right: 0;
+    border-radius: 6px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.menu-dropdown a{
+     color: #333;
+    padding: 10px 14px;
+    display: block;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+
+/* =====================
+   LOGIN POPUP
+===================== */
+.login-form {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+
+.login-form form {
+    background: #fff;
+    max-width: 400px;
+    margin: 120px auto;
+    padding: 30px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.login-form h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background: #198754;
+    border: none;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* =====================
+   HERO SECTION
+===================== */
+.header-container {
+    text-align: center;
+    padding-top: 200px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.header-container h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.text-primary {
+    color: #FFBA00;
+}
+
+.header-container p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* =====================
+   ABOUT SECTION
+===================== */
+.about-section {
+    padding: 80px 0;
+    background: #6ec159;
+}
+
+.about-section .container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.about-content h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.about-content p {
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+/* =====================
+   SERVICES
+===================== */
+.service-section{
+    padding:50px;
+    text-align:center;
+}
+
+.service-cards{
+    margin-top: 40px;
+    display:flex;
+    justify-content:center;
+    gap:60px;
+    flex-wrap:wrap;
+}
+
+.card{
+    width:250px;
+    padding:20px;
+    background:white;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.card i{
+    font-size:30px;
+    color:#FFBA00;
+}
+
+/* =====================
+   CONTACT
+===================== */
+.contact-section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.info-item i {
+    font-size: 32px;
+    color: #198754;
+}
+
+/* =====================
+   FEEDBACK
+===================== */
+#feedback {
+    background: #a0eca2;
+    padding: 80px 0;
+}
+.feedback h2 {
+  text-align: center;
+    margin-bottom: 15px;
+}
+.feedback-box {
+    display: flex;
+    max-width: 900px;
+    margin: auto;
+    background: #f8f9fa;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.feedback-box .left {
+    width: 40%;
+    background: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feedback-box img {
+    width: 80%;
+}
+
+.feedback-box .right {
+    width: 60%;
+    padding: 30px;
+}
+
+.field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+}
+
+.btn {
+    background: #FFBA00;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+/* =====================
+   FOOTER
+===================== */
+.footer-distributed {
+    background: #1c1c1c;
+    color: #fff;
+    padding: 50px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-icons a {
+    color: #fff;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #000;
+        position: absolute;
+        top: 65px;
+        right: 0;
+        width: 100%;
+        
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .about-section .container,
+    .feedback-box,
+    .contact-info {
+        flex-direction: column;
+    }
+}
+
+    </style>
+
+
+</head>
+<body>
+    <header id="home">
+        <nav>
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/sprout.png') }}" alt=""><span>AgriCare</span>Pro
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#service">Service</a></li>
+                <li><a href="#contact">Get in Touch</a></li>
+                <li><a href="#feedback">Suggestion</a></li>
+                <!-- <li><button type="button" id="loginBtn">Admin Login</button></li> -->
+                <div class="dropdown">
+                    <button class="dropbtn">Login
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                      <a href="#" id="loginBtn">Admin Login</a>
+                      <a href="/customer_login">Customer Login</a>
+                    </div>
+                </div>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+        <div id="loginForm" class="login-form">
+            <form action="/login" method="POST">
+                <span class="close-btn">&times;</span>
+                <h3>Admin Login</h3>
+                <input type="text" placeholder="Username" name="username" required>
+                <input type="password" placeholder="Password" name="password" required>
+                <button type="submit" name="Submit" value="Submit">Login</button>
+            </form>
+        </div>
+        <div class="header-container">
+            <h1><span class="text-primary">Empower Farmers</span> <br><span class="border-top">Enhancing Yields</span></h1>
+            <p>Welcome to our Fertilizer & Pesticide Inventory Management System! Efficient ordering of fertilizers and pesticides. "Highly recommended! Excellent support and user-friendly interface."</p>
+        </div>
+    </header>
+
+
+    <!-- About us Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <h2><span style="color: #FFBA00;">About</span> Us</h2>
+                <p>Welcome to AgriCarePro, your trusted partner in agriculture. Our Fertilizer and Pesticide Inventory Management System ensures efficient inventory tracking for fertilizers and pesticides. With real-time monitoring of stock levels, we help you enhance yields and empower farmers.</p>
+                <p>Our mission is to support farmers with high-quality products and innovative solutions. We are dedicated to providing excellent customer service and ensuring that our clients have access to the best tools for successful farming.</p>
+                <p>Join us in our mission to revolutionize agriculture and make a positive impact on the farming community.</p>
+            </div>
+            <div class="about-image">
+                <img src="{{ url_for('static', filename='images/aboutimg.webp') }}" alt="About Us">
+            </div>
+        </div>
+    </section>
+<!-- Service Section -->
+    <section id="service" class="service-section">
+        <div class="container">
+            <h2>Our <span style="color: #FFBA00;">Services</span></h2>
+            <div class="service-cards">
+                <div class="card">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Inventory Management</h3>
+                    <p>Efficient tracking of fertilizers and pesticides to ensure optimal stock levels.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-truck"></i>
+                    <h3>Supply Chain Optimization</h3>
+                    <p>Streamlining the supply chain process from suppliers to farmers.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Analytics & Reporting</h3>
+                    <p>Providing detailed analytics and reports to make informed decisions.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-users"></i>
+                    <h3>Customer Support</h3>
+                    <p>24/7 customer support to assist with any issues or queries.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- contact us -->
+<div class="contact-section" id="contact">
+    <h1><span style="color: #FFBA00;">Contact</span> Us</h1>
+    <p class="slogan">Feel Free To Contact</p>
+    <div class="contact-info">
+        <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i><br>
+            <p>Address</p>
+            <h6>126 AgriCarePro, Natrampalli, Tirupattur</h6>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-phone-alt"></i><br>
+            <p>Phone No.</p>
+            <h6>9042940154</h6>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-envelope"></i><br>
+            <p>Email</p>
+            <h6>info@agricarepro.com</h6>
+        </div>
+    </div>
+</div>
+<!-- end of contact us -->
+
+
+<!-- feedback section -->
+<section id="feedback">
+    <h2><span style="color: #FFBA00;">Feedback</span> Form</h2>
+    <div class="container3">
+        <div class="feedback-box">
+            <div class="left">
+                <img src="{{ url_for('static', filename='images/rating.png') }}" alt="Feedback Image">
+            </div>
+            <div class="right">
+                <form action="/feedback" method="POST">
+                <h1>We Value Your Feedback</h1>
+                <input type="text" class="field" name="fname" placeholder="Your Name" required>
+                <input type="email" class="field" name="email" placeholder="Your Email" required>
+                <input type="tel" class="field" name="phone" placeholder="Phone" required>
+                <textarea placeholder="Message" name="msg" class="field" required></textarea>
+                <button type="submit" name="submit" class="btn">Send Feedback</button>
+            </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end of feedback  -->
+
+<!-- footer section -->
+<section id="footer">
+    <footer class="footer-distributed">
+        <div class="footer-left">
+            <h3><img src="" alt=""><span style="color: #FFBA00;">AgriCare</span> Pro</h3>
+
+            <p class="footer-links">
+                <a href="#home" class="link-1">Home</a>&nbsp;&nbsp;
+                <a href="#about">About Us</a>&nbsp;&nbsp;
+                <a href="#service">Services</a>&nbsp;&nbsp;
+                <a href="{{ url_for('customer_login')}}">Buy Products</a>&nbsp;&nbsp;
+                <a href="#contact">Contact</a>&nbsp;&nbsp;
+                <a href="#feedback">Feedback</a>&nbsp;&nbsp;
+            </p>
+            <p class="footer-company-name">&copy; 2026 Fertilizer & Pesticide Inventory Management System</p>
+        </div>
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>About the AgriCare Pro</span><br>
+                Welcome to our Fertilizer & Pesticide Inventory Management System project! <br>
+                We provide top-quality fertilizers and pesticides to help farmers achieve better yields and healthier crops.
+            </p>
+    
+            <div class="footer-icons">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-youtube"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+            </div>
+        </div>
+    </footer>
+</section>
+<!-- end of footer -->
+
+
+
+
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navUl = document.querySelector('.nav-links');
+            const loginBtn = document.getElementById('loginBtn');
+            const loginForm = document.getElementById('loginForm');
+            const closeBtn = document.querySelector('.close-btn');
+
+            menuToggle.addEventListener('click', function () {
+                navUl.classList.toggle('active');
+            });
+
+            loginBtn.addEventListener('click', function () {
+                loginForm.style.display = 'block';
+            });
+
+            closeBtn.addEventListener('click', function () {
+                loginForm.style.display = 'none';
+            });
+
+            window.addEventListener('click', function (event) {
+                if (event.target == loginForm) {
+                    loginForm.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

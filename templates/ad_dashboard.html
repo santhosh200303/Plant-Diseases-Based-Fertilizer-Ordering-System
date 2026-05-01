@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon.png') }}">
+    <title>AgriCare Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+    /* Page layout */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #90dd7d;
+}
+
+/* Main content */
+.content {
+    margin-left: 220px; /* adjust if sidebar width changes */
+    padding: 40px 30px;
+}
+
+/* Dashboard header */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+    font-size: 38px;
+    letter-spacing: 1px;
+    color: #333;
+}
+
+.dashboard-header h1 span {
+    color: #093b31;
+}
+
+/* Date */
+.date-time {
+    font-size: 20px;
+    font-weight: 500;
+    color: #FFBA00;
+}
+
+/* Widgets grid */
+.widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+/* Widget cards */
+.widget {
+    background: white;
+    padding: 25px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Hover effect */
+.widget:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+/* Icon style */
+.widget i {
+    font-size: 38px;
+    padding: 18px;
+    border-radius: 50%;
+    background: #093b31;
+    color: white;
+}
+
+/* Text */
+.widget-info h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #555;
+}
+
+.widget-info .mb-0 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #111;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .content {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    .widget {
+        padding: 18px;
+    }
+
+    .widget i {
+        font-size: 28px;
+        padding: 14px;
+    }
+
+    .widget-info .mb-0 {
+        font-size: 26px;
+    }
+}
+    </style>
+</head>
+<body>
+    {% include 'adminheader.html' %}
+
+    <div class="content" id="dashboardContent">
+        <div class="widgets">
+            <div class="widget">
+                <i class="fas fa-cubes"></i>
+                <div class="widget-info">
+                    <h2>Total Products</h2>
+                    <h2 class="mb-0">{{ product_total }}</h2>
+                </div>
+            </div>
+            <div class="widget">
+                <i class="fas fa-user"></i>
+                <div class="widget-info">
+                    <h2>Total Suppliers</h2>
+                    <h2 class="mb-0">{{ supplier_total }}</h2>
+                </div>
+            </div>
+            <div class="widget">
+                <i class="fas fa-shopping-basket"></i>
+                <div class="widget-info">
+                    <h2>Total Purchase</h2>
+                    <h2 class="mb-0">{{ purchase_total }}</h2>
+                </div>
+            </div>
+            <div class="widget">
+                <i class="fas fa-shopping-cart"></i>
+                <div class="widget-info">
+                    <h2>Total Sale</h2>
+                    <h2 class="mb-0">{{ sale_total }}</h2>
+                </div>
+            </div> 
+        </div>
+    </div>
+</body>
+</html>

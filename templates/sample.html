@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Order Confirmation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card shadow-lg">
+            <div class="card-header bg-success text-white text-center">
+                <h2><i class="fas fa-check-circle"></i> Order Confirmed</h2>
+            </div>
+            <div class="card-body">
+                <h3>Thank you for your order, {{ orders.customerName }}!</h3>
+                <p>Your order has been placed successfully. Here are your order details:</p>
+
+                <div class="mb-3">
+                    <p><strong>Bill No.:</strong> {{ orders.bill_no }}</p>
+                    <p><strong>Bill Date:</strong> {{ orders.bill_date }}</p>
+                    <p><strong>Customer Name:</strong> {{ orders.customerName }}</p>
+                    <p><strong>Phone Number:</strong> {{ orders.customerMobile }}</p>
+                    <p><strong>Customer Address:</strong> {{ orders.customerAddress }}</p>
+                    <p><strong>Grand Total:</strong> Rs. {{ orders.gtotal }}</p>
+                </div>
+
+                <h4>Order Summary</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Rate</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for items in orders.sale_details %}
+                            <tr>
+                                <td>{{ items.product_name }}</td>
+                                <td>{{ items.quantity }}</td>
+                                <td>Rs. {{ items.product_rate }}</td>
+                                <td>{{ (items.quantity | float) * (items.product_rate | float) }}</td>                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <a href="{{ url_for('sales') }}" class="btn btn-primary mt-3">Back to Shopping</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</body>
+</html>

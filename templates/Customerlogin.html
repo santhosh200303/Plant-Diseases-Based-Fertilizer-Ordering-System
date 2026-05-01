@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon.png') }}">
+    <title>AgriCare Pro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+  
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+           
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+           background-color: #093b31; /* Replace with your desired color */
+            backdrop-filter: blur(5px);
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        nav .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 32px;
+            font-weight: bolder;
+        }
+
+        nav .logo img {
+            width: 60px;
+            margin-right: 10px;
+        }
+
+        nav .logo span {
+            color: #FFBA00;
+            margin-left: 5px;
+        }
+
+        nav .back-button {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 20px;
+            background-color: #FFBA00;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav .back-button:hover {
+            background-color: white;
+            color: #000;
+        }
+
+        form {
+            background-color: white;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 100px;
+            border-radius: 50%;
+        }
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .cancelbtn, .registerbtn,.btn {
+            width: auto;
+            padding: 10px 18px;
+            border-radius: 4px;
+        }
+
+        .cancelbtn {
+            background-color: #f44336;
+        }
+
+        .registerbtn {
+            background-color: #04AA6D;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        span.psw a {
+            float: right;
+            padding-top: 16px;
+            text-decoration:none;
+            color:#000;
+            font-weight:bold;
+        }
+
+        @media screen and (max-width: 768px) {
+            nav {
+                height: 70px;
+            }
+
+            nav .logo {
+                font-size: 24px;
+            }
+
+            nav .logo img {
+                width: 50px;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            nav .logo {
+                font-size: 20px;
+            }
+
+            nav .logo img {
+                width: 40px;
+            }
+
+            form {
+                margin: 50px;
+                padding: 10px;
+            }
+
+            input[type=text], input[type=password] {
+                padding: 10px 15px;
+            }
+
+            button, .cancelbtn, .registerbtn {
+                padding: 12px 15px;
+            }
+
+            span.psw a {
+                float: none;
+                display: block;
+                text-align: center;
+                padding-top: 10px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <header id="home">
+        <nav>
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/sprout.png') }}"><span>AgriCare</span>Pro
+            </div>
+            <a href="{{ url_for('index_page') }}" class="back-button">Back to Home</a>
+        </nav>
+    </header>
+
+    <form action="/Custloginquery" method="POST">
+        <div class="imgcontainer">
+            <img src="{{ url_for('static', filename='images/login.png') }}" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+
+            <button type="submit" name="submit">Login</button>
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="reset" class="cancelbtn">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="registerbtn" data-bs-toggle="modal" data-bs-target="#myModal">Register</button>
+            <span class="psw"> <a href="/change_password">Forgot password?</a></span>
+        </div>
+    </form>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Sign Up</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      <form  action="/CustRegquery" method="POST">
+    <div class="container1">
+    <p>Please fill in this form to create an account.</p> 
+    <hr>
+      <label for="email"><b>Email OR Username:</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required>
+
+      <label for="psw"><b>Password:</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+
+      <label for="psw-repeat"><b>Repeat Password:</b></label>
+      <input type="password" placeholder="Repeat Password" name="pswrepeat" required>
+
+      <label>
+        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+      </label>
+
+      <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+      <div class="clearfix">
+        <button type="submit" name="submit" class="signup">Sign Up</button>
+      </div>
+    </div>
+  </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>
