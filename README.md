@@ -6,6 +6,7 @@ Users can upload an image of a plant leaf, and the system uses a Convolutional N
 The system includes separate modules for Admin and Customer. The Admin can manage products, customers, orders, and feedback, while customers can register, log in, detect plant diseases, order fertilizers, track their orders, and download invoices.
 
 #Features
+
  Plant disease detection using CNN (PyTorch)
  Leaf image upload and automatic disease prediction
  Fertilizer recommendation based on detected disease
@@ -18,13 +19,18 @@ The system includes separate modules for Admin and Customer. The Admin can manag
  Admin dashboard for managing products, customers, orders, and feedback.
 
  #Technologies
- Frontend
+ 
+Frontend
+
 HTML5,CSS3,Bootstrap,JavaScript
 Backend
+
 Python,Flask,Database,MySQL
 Machine Learning
+
 PyTorch,TorchVision,CNN (Convolutional Neural Network)
 Python Libraries
+
 Flask
 Gunicorn
 NumPy
