@@ -30,19 +30,15 @@ The system includes separate modules for Admin and Customer. The Admin can manag
  #Technologies
  
 ***Frontend
-
 HTML5,CSS3,Bootstrap,JavaScript
 
 ***Backend
-
 Python,Flask,Database,MySQL
 
 ***Machine Learning
-
 PyTorch,TorchVision,CNN (Convolutional Neural Network)
 
 ***Python Libraries
-
 Flask,Gunicorn,NumPy,Pandas,Pillow,Torch,TorchVision,MySQL Connector Python
 
 #Workflow
